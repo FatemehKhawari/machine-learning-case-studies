@@ -1,6 +1,6 @@
 # Machine Learning Case Studies
 
-A collection of supervised machine learning case studies covering classification, regression, data preprocessing, feature engineering, and model evaluation.
+A collection of machine learning case studies exploring supervised and unsupervised learning, preprocessing, feature engineering, optimization, model evaluation, and algorithmic experimentation.
 
 ## Case Study 1: Iris Flower Classification
 
