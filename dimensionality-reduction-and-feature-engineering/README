@@ -1,0 +1,539 @@
+# Dimensionality Reduction and Feature Engineering in Machine Learning
+
+## Overview
+
+Modern machine learning datasets often contain a large number of features. Although more features can provide additional information, high-dimensional data can also introduce challenges such as increased computational cost, redundant information, noise, and overfitting.
+
+Dimensionality reduction and feature engineering techniques aim to create a more efficient representation of data by selecting important features or transforming the original features into a lower-dimensional space.
+
+This project explores the main approaches to dimensionality reduction:
+
+1. **Feature Selection**
+2. **Feature Extraction**
+
+   * Linear Feature Extraction
+   * Nonlinear Feature Extraction
+
+The project studies the mathematical foundations, machine learning applications, and implementation of different dimensionality reduction methods.
+
+---
+
+# 1. Feature Selection
+
+## Definition
+
+Feature selection is the process of selecting a subset of the original features that contain the most useful information for a machine learning task.
+
+Unlike feature extraction, feature selection does not create new variables. It keeps the original features and removes irrelevant or redundant ones.
+
+Example:
+
+Original dataset:
+
+```
+Age
+Income
+Education
+Occupation
+Height
+Weight
+```
+
+After feature selection:
+
+```
+Income
+Education
+Occupation
+```
+
+The selected features maintain their original meaning.
+
+---
+
+## Why Feature Selection?
+
+Feature selection helps to:
+
+* Reduce computational complexity
+* Remove irrelevant features
+* Reduce noise
+* Improve model interpretability
+* Prevent overfitting
+* Improve training speed
+
+---
+
+# Methods of Feature Selection
+
+## 1. Filter Methods
+
+Filter methods evaluate features independently of a machine learning model.
+
+They use statistical measures to rank features.
+
+Examples:
+
+### Correlation Analysis
+
+Measures the relationship between features and the target variable.
+
+For a feature \(X_i\):
+
+$$
+corr(X_i,y)
+$$
+
+Features with very low correlation may be removed.
+
+Applications:
+
+* Regression problems
+* Initial exploratory data analysis
+
+---
+
+### Chi-Square Test
+
+Used mainly for categorical variables.
+
+It measures whether a feature and target variable are statistically dependent.
+
+Applications:
+
+* Text classification
+* Categorical datasets
+
+---
+
+### Mutual Information
+
+Measures how much information one variable provides about another.
+
+$$
+I(X;Y)
+$$
+
+Higher mutual information means stronger dependency.
+
+Applications:
+
+* Feature ranking
+* Nonlinear relationships
+
+---
+
+## 2. Wrapper Methods
+
+Wrapper methods evaluate subsets of features by training a machine learning model.
+
+The model performance determines which features are kept.
+
+Examples:
+
+### Recursive Feature Elimination (RFE)
+
+RFE:
+
+1. Trains a model using all features
+2. Removes the least important features
+3. Retrains the model
+4. Repeats until the desired number of features remains
+
+Applications:
+
+* Logistic Regression
+* Support Vector Machines
+* Random Forest
+
+---
+
+## 3. Embedded Methods
+
+Embedded methods perform feature selection during model training.
+
+Examples:
+
+### LASSO Regression
+
+LASSO adds an L1 regularization term:
+
+$$
+Loss+\lambda\sum |w_i|
+$$
+
+Some feature weights become zero:
+
+$$
+w_i=0
+$$
+
+Those features can be removed.
+
+Applications:
+
+* Regression
+* High-dimensional datasets
+
+---
+
+### Tree-Based Feature Importance
+
+Decision trees and ensemble models can estimate feature importance.
+
+Examples:
+
+* Random Forest
+* Gradient Boosting
+* XGBoost
+
+---
+
+# 2. Feature Extraction
+
+## Definition
+
+Feature extraction transforms the original features into a new set of features called representations or components.
+
+The new features are combinations of the original variables.
+
+Example:
+
+Original features:
+
+$$
+x_1,x_2,x_3,x_4
+$$
+
+After extraction:
+
+$$
+z_1,z_2
+$$
+
+The new features may not have a direct physical interpretation, but they preserve important information.
+
+---
+
+# Types of Feature Extraction
+
+Feature extraction methods are divided into:
+
+1. Linear methods
+2. Nonlinear methods
+
+---
+
+# 2.1 Linear Feature Extraction Methods
+
+Linear methods assume that data can be represented using linear combinations of the original features.
+
+---
+
+# Principal Component Analysis (PCA)
+
+## Concept
+
+PCA is the most widely used linear dimensionality reduction technique.
+
+It finds new directions called principal components that maximize data variance.
+
+Mathematically:
+
+$$
+Cv=\lambda v
+$$
+
+where:
+
+* \(C\) is the covariance matrix
+* \(v\) is an eigenvector
+* \(\lambda\) is the eigenvalue
+
+The principal components with the largest eigenvalues contain the most information.
+
+Applications:
+
+* Data visualization
+* Noise reduction
+* Feature compression
+* Machine learning preprocessing
+
+---
+
+# Linear Discriminant Analysis (LDA)
+
+## Concept
+
+LDA is a supervised dimensionality reduction method.
+
+Unlike PCA, LDA uses class labels and finds projections that maximize separation between classes.
+
+Objective:
+
+$$
+\frac{\text{between-class variance}}
+{\text{within-class variance}}
+$$
+
+Applications:
+
+* Classification problems
+* Pattern recognition
+* Medical diagnosis
+
+---
+
+# Singular Value Decomposition (SVD)
+
+## Concept
+
+SVD decomposes a matrix:
+
+$$
+X=U\Sigma V^T
+$$
+
+where:
+
+* \(U\) contains left singular vectors
+* \(\Sigma\) contains singular values
+* \(V\) contains right singular vectors
+
+Applications:
+
+* Recommendation systems
+* Image compression
+* Natural language processing
+
+---
+
+# Factor Analysis
+
+## Concept
+
+Factor analysis assumes observed variables are generated by hidden factors.
+
+Mathematical representation:
+
+$$
+X=LF+\epsilon
+$$
+
+where:
+
+* \(F\) represents hidden factors
+* \(L\) represents factor loadings
+* \(\epsilon\) represents noise
+
+Applications:
+
+* Psychology
+* Finance
+* Social sciences
+* Latent variable modeling
+
+---
+
+# 2.2 Nonlinear Feature Extraction Methods
+
+Many real-world datasets do not follow linear structures.
+
+Nonlinear methods attempt to discover complex patterns and curved relationships.
+
+---
+
+# Kernel PCA
+
+## Concept
+
+Kernel PCA extends PCA by applying the kernel trick.
+
+Instead of working directly with:
+
+$$
+X
+$$
+
+data is transformed into a higher-dimensional feature space:
+
+$$
+\phi(X)
+$$
+
+and PCA is applied there.
+
+Applications:
+
+* Complex pattern recognition
+* Image classification
+* Nonlinear datasets
+
+---
+
+# t-Distributed Stochastic Neighbor Embedding (t-SNE)
+
+## Concept
+
+t-SNE is a nonlinear dimensionality reduction method mainly used for visualization.
+
+It preserves local relationships between samples.
+
+Example:
+
+High-dimensional data:
+
+$$
+1000 \text{ features}
+$$
+
+↓
+
+t-SNE
+
+↓
+
+2D visualization
+
+Applications:
+
+* Visualization of embeddings
+* Biology datasets
+* Image feature visualization
+* Deep learning analysis
+
+---
+
+# Uniform Manifold Approximation and Projection (UMAP)
+
+## Concept
+
+UMAP is a modern nonlinear dimensionality reduction technique based on manifold learning and topology.
+
+Compared with t-SNE, UMAP is often faster and preserves more global structure.
+
+Applications:
+
+* Large datasets
+* Single-cell analysis
+* NLP embeddings
+* Visualization
+
+---
+
+# Autoencoders
+
+## Concept
+
+Autoencoders are neural networks that learn compressed representations of data.
+
+Architecture:
+
+```
+Input
+  |
+Encoder
+  |
+Latent Representation
+  |
+Decoder
+  |
+Reconstructed Data
+```
+
+The encoder learns:
+
+$$
+z=f(x)
+$$
+
+The decoder reconstructs:
+
+$$
+\hat{x}=g(z)
+$$
+
+Applications:
+
+* Image compression
+* Anomaly detection
+* Representation learning
+* Deep learning
+
+---
+
+# Comparison of Methods
+
+| Category           | Method             | Type      | Main Idea                      |
+| ------------------ | ------------------ | --------- | ------------------------------ |
+| Feature Selection  | Correlation        | Filter    | Remove weak features           |
+| Feature Selection  | Chi-square         | Filter    | Statistical dependency         |
+| Feature Selection  | Mutual Information | Filter    | Information content            |
+| Feature Selection  | RFE                | Wrapper   | Select best subset             |
+| Feature Selection  | LASSO              | Embedded  | Zero-out coefficients          |
+| Feature Extraction | PCA                | Linear    | Maximum variance               |
+| Feature Extraction | LDA                | Linear    | Maximum class separation       |
+| Feature Extraction | SVD                | Linear    | Matrix decomposition           |
+| Feature Extraction | Factor Analysis    | Linear    | Hidden factors                 |
+| Feature Extraction | Kernel PCA         | Nonlinear | Kernel transformations         |
+| Feature Extraction | t-SNE              | Nonlinear | Preserve local structure       |
+| Feature Extraction | UMAP               | Nonlinear | Manifold learning              |
+| Feature Extraction | Autoencoder        | Nonlinear | Neural representation learning |
+
+---
+
+# Machine Learning Applications
+
+Dimensionality reduction is widely used in:
+
+* Computer vision
+* Natural language processing
+* Bioinformatics
+* Recommendation systems
+* Financial modeling
+* Medical diagnosis
+* Anomaly detection
+
+---
+
+# Project Objectives
+
+This project aims to:
+
+* Understand the role of dimensionality reduction in machine learning
+* Compare feature selection and feature extraction
+* Study mathematical foundations of PCA and other methods
+* Implement dimensionality reduction algorithms
+* Analyze the effect of dimensionality reduction on model performance
+* Connect mathematical concepts with practical machine learning applications
+
+---
+
+# Technologies Used
+
+* Python
+* NumPy
+* Pandas
+* Matplotlib
+* Scikit-learn
+* TensorFlow/PyTorch (for autoencoders)
+
+---
+
+# Future Extensions
+
+Possible extensions include:
+
+* Implement PCA from scratch using eigenvalue decomposition
+* Compare PCA, LDA, and SVD experimentally
+* Apply t-SNE and UMAP for visualization
+* Build an autoencoder for image compression
+* Study dimensionality reduction in deep learning models
+
+---
+
+# Author
+
+Fatemeh Khavari
+
+Applied Mathematics | Optimization | Machine Learning
