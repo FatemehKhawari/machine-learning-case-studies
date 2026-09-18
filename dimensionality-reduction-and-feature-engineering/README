@@ -1,5 +1,153 @@
 # Dimensionality Reduction and Feature Engineering in Machine Learning
 
+
+
+
+
+
+Dimensionality Reduction & Feature Engineering
+│
+├── 1. Feature Selection
+│   │
+│   ├── Goal:
+│   │     Select important original features
+│   │     Remove irrelevant/redundant features
+│   │
+│   ├── Advantages
+│   │     ├── Reduce computational cost
+│   │     ├── Reduce noise
+│   │     ├── Improve interpretability
+│   │     ├── Prevent overfitting
+│   │     └── Improve training speed
+│   │
+│   └── Methods
+│       │
+│       ├── A. Filter Methods
+│       │   │
+│       │   ├── Correlation Analysis
+│       │   │     └── Measure relationship between feature and target
+│       │   │
+│       │   ├── Chi-Square Test
+│       │   │     └── Test dependency between categorical variables
+│       │   │
+│       │   └── Mutual Information
+│       │         └── Measure information shared between variables
+│       │
+│       ├── B. Wrapper Methods
+│       │   │
+│       │   └── Recursive Feature Elimination (RFE)
+│       │         ├── Train model
+│       │         ├── Remove least important features
+│       │         ├── Retrain model
+│       │         └── Repeat
+│       │
+│       └── C. Embedded Methods
+│           │
+│           ├── LASSO Regression
+│           │     ├── L1 Regularization
+│           │     └── Forces some weights to zero
+│           │
+│           └── Tree-Based Feature Importance
+│                 ├── Decision Trees
+│                 ├── Random Forest
+│                 ├── Gradient Boosting
+│                 └── XGBoost
+│
+│
+└── 2. Feature Extraction
+    │
+    ├── Goal:
+    │     Transform original features into new representations
+    │     (components/features)
+    │
+    ├── Types
+    │
+    ├────────────────────────────────────
+    │
+    ├── 2.1 Linear Feature Extraction
+    │
+    │   ├── A. PCA
+    │   │     │
+    │   │     ├── Finds directions of maximum variance
+    │   │     ├── Uses covariance matrix
+    │   │     ├── Uses eigenvalues/eigenvectors
+    │   │     │
+    │   │     └── Applications:
+    │   │           ├── Visualization
+    │   │           ├── Noise reduction
+    │   │           └── Feature compression
+    │   │
+    │   ├── B. Linear Discriminant Analysis (LDA)
+    │   │     │
+    │   │     ├── Supervised method
+    │   │     ├── Uses class labels
+    │   │     └── Maximizes class separation
+    │   │
+    │   ├── C. Singular Value Decomposition (SVD)
+    │   │     │
+    │   │     ├── Matrix decomposition
+    │   │     ├── X = UΣVᵀ
+    │   │     └── Applications:
+    │   │           ├── Recommendation systems
+    │   │           ├── NLP
+    │   │           └── Image compression
+    │   │
+    │   └── D. Factor Analysis
+    │         │
+    │         ├── Finds hidden factors
+    │         ├── Models latent variables
+    │         └── Applications:
+    │               ├── Finance
+    │               ├── Psychology
+    │               └── Social sciences
+    │
+    ├────────────────────────────────────
+    │
+    └── 2.2 Nonlinear Feature Extraction
+        │
+        ├── A. Kernel PCA
+        │     │
+        │     ├── Uses kernel trick
+        │     ├── Handles nonlinear patterns
+        │     └── Applications:
+        │           ├── Image classification
+        │           └── Pattern recognition
+        │
+        ├── B. t-SNE
+        │     │
+        │     ├── Preserves local relationships
+        │     ├── Mainly visualization method
+        │     └── Applications:
+        │           ├── Embedding visualization
+        │           ├── Biology data
+        │           └── Deep learning analysis
+        │
+        ├── C. UMAP
+        │     │
+        │     ├── Manifold learning method
+        │     ├── Faster than t-SNE
+        │     └── Applications:
+        │           ├── Large datasets
+        │           ├── NLP embeddings
+        │           └── Visualization
+        │
+        └── D. Autoencoders
+              │
+              ├── Neural network based
+              ├── Encoder
+              ├── Latent representation
+              ├── Decoder
+              │
+              └── Applications:
+                    ├── Image compression
+                    ├── Anomaly detection
+                    └── Representation learning
+
+
+
+
+
+
 ## Overview
 
 Modern machine learning datasets often contain a large number of features. Although more features can provide additional information, high-dimensional data can also introduce challenges such as increased computational cost, redundant information, noise, and overfitting.
