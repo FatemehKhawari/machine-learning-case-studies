@@ -1,0 +1,512 @@
+# Energy-Based Learning
+
+A research-oriented project exploring **Energy-Based Learning (EBL)**, energy functions, optimization-based inference, and their applications in machine learning and autonomous systems.
+
+This project investigates the connection between **mathematical optimization, machine learning, and decision-making** through energy-based models.
+
+---
+
+# 1. What is Energy-Based Learning?
+
+Energy-Based Learning (EBL) is a framework in machine learning where a model learns an **energy function** that measures the compatibility between variables.
+
+Instead of directly predicting an output probability, an energy-based model assigns an energy value to different configurations.
+
+The fundamental idea is:
+
+- **Low energy → desirable or likely configuration**
+- **High energy → undesirable or unlikely configuration**
+
+The model learns an energy function:
+
+\[
+E_\theta(x,y)
+\]
+
+where:
+
+- \(x\) = input data
+- \(y\) = output or label
+- \(\theta\) = model parameters
+- \(E_\theta(x,y)\) = energy assigned to the configuration
+
+Prediction is performed by selecting the configuration with minimum energy:
+
+\[
+\hat{y}=\arg\min_y E_\theta(x,y)
+\]
+
+Therefore, inference becomes an optimization problem.
+
+---
+
+# 2. Why were Energy-Based Models Developed?
+
+Traditional machine learning models often learn a direct mapping:
+
+\[
+x \rightarrow y
+\]
+
+For example:
+
+- image → class label
+- sensor data → prediction
+- state → action
+
+However, many real-world problems are more complex.
+
+Examples:
+
+- autonomous driving
+- robotics
+- aerospace trajectory planning
+- structured prediction
+- decision-making systems
+
+These problems require evaluating many possible solutions and selecting the best one.
+
+Energy-based models were introduced to provide a flexible framework where:
+
+- different possible solutions can be compared
+- constraints can be incorporated naturally
+- learning and optimization can be combined
+
+The model does not only ask:
+
+> "What is the answer?"
+
+It asks:
+
+> "Which solution has the lowest cost or energy?"
+
+---
+
+# 3. How Does Energy-Based Learning Work?
+
+An energy-based model learns an energy landscape.
+
+Imagine:
+
+```
+High Energy
+
+       *
+     *   *
+   *       *
+
+--------------------
+
+      *
+        *
+          *
+
+Low Energy
+```
+
+The model learns a surface where desirable states are located in low-energy regions.
+
+Training tries to:
+
+1. Reduce energy of correct configurations.
+2. Increase energy of incorrect configurations.
+
+For classification:
+
+Correct class:
+
+\[
+E(x,y_{correct}) \downarrow
+\]
+
+
+Incorrect class:
+
+\[
+E(x,y_{incorrect}) \uparrow
+\]
+
+---
+
+# 4. Training Energy-Based Models
+
+A common training objective is a margin-based loss:
+
+\[
+L=
+max(0,
+m+E(x,y_{correct})
+-E(x,y_{incorrect}))
+\]
+
+where:
+
+- \(m\) = margin between correct and incorrect solutions.
+
+The goal is:
+
+\[
+E(x,y_{correct})
+<
+E(x,y_{incorrect})
+\]
+
+---
+
+# 5. Relationship Between Energy-Based Learning and Optimization
+
+Energy-based learning has a strong connection with optimization.
+
+There are two main optimization problems.
+
+## 5.1 Parameter Optimization
+
+During training:
+
+\[
+\theta^*
+=
+\arg\min_\theta L(\theta)
+\]
+
+The model parameters are optimized using algorithms such as:
+
+- Gradient Descent
+- Stochastic Gradient Descent
+- Adam
+- Newton Method
+- BFGS
+- L-BFGS
+
+---
+
+## 5.2 Energy Minimization During Inference
+
+Prediction can also be formulated as:
+
+\[
+y^*
+=
+\arg\min_y E_\theta(x,y)
+\]
+
+This means the model searches for the solution with minimum energy.
+
+---
+
+# 6. Types of Energy-Based Models
+
+## 6.1 Classical Energy-Based Models
+
+Early energy-based models were developed in machine learning and statistical physics.
+
+Examples:
+
+- Hopfield Networks
+- Boltzmann Machines
+- Restricted Boltzmann Machines (RBM)
+
+These models define an energy function over visible and hidden variables.
+
+---
+
+# 6.2 Restricted Boltzmann Machines (RBM)
+
+An RBM is a probabilistic energy-based model consisting of:
+
+- visible units
+- hidden units
+
+The energy function is:
+
+\[
+E(v,h)
+=
+-a^Tv-b^Th-v^TWh
+\]
+
+where:
+
+- \(v\) = visible variables
+- \(h\) = hidden variables
+- \(W\) = connection weights
+
+Training commonly uses:
+
+- Contrastive Divergence
+- Gibbs Sampling
+
+Applications:
+
+- feature learning
+- dimensionality reduction
+- generative modeling
+
+---
+
+# 6.3 Deep Energy-Based Models
+
+Modern energy-based models use neural networks to represent the energy function.
+
+Instead of:
+
+\[
+E(x,y)=linear\ function
+\]
+
+we can use:
+
+\[
+E_\theta(x,y)=NeuralNetwork_\theta(x,y)
+\]
+
+Advantages:
+
+- powerful representations
+- ability to model complex data
+- applications in vision and robotics
+
+---
+
+# 6.4 Contrastive Energy-Based Learning
+
+Contrastive learning trains models by comparing:
+
+- positive examples
+- negative examples
+
+The model learns:
+
+\[
+Energy(positive)
+<
+Energy(negative)
+\]
+
+Examples:
+
+- Contrastive Divergence
+- Noise Contrastive Estimation
+- Contrastive Representation Learning
+
+---
+
+# 6.5 Score-Based and Diffusion Energy Models
+
+Modern generative models are closely related to energy-based ideas.
+
+They learn the structure of data distributions through:
+
+- energy functions
+- score functions
+- probability gradients
+
+Applications:
+
+- image generation
+- molecular modeling
+- scientific computing
+
+---
+
+# 7. Applications of Energy-Based Learning
+
+## Computer Vision
+
+Examples:
+
+- image classification
+- image generation
+- object recognition
+
+
+## Natural Language Processing
+
+Examples:
+
+- language modeling
+- sequence prediction
+
+
+## Robotics and Autonomous Systems
+
+Energy functions can represent:
+
+- collision cost
+- distance to goal
+- trajectory smoothness
+- control effort
+
+Example:
+
+\[
+E(\tau)
+=
+E_{goal}
++
+E_{collision}
++
+E_{control}
+\]
+
+Planning becomes:
+
+\[
+\tau^*
+=
+\arg\min_\tau E(\tau)
+\]
+
+This creates a connection between:
+
+Machine Learning → Optimization → Planning
+
+---
+
+# 8. Energy-Based Learning and Autonomous Vehicles
+
+For autonomous vehicles, an energy function can represent the quality of possible actions.
+
+Example:
+
+A vehicle evaluates possible trajectories:
+
+```
+Trajectory 1 → Energy = 15
+Trajectory 2 → Energy = 3
+Trajectory 3 → Energy = 20
+```
+
+The vehicle chooses:
+
+```
+Trajectory 2
+```
+
+because it has the lowest energy.
+
+Energy terms may include:
+
+- safety
+- obstacle avoidance
+- passenger comfort
+- efficiency
+- traffic rules
+
+---
+
+# 9. Project Goals
+
+This project aims to explore:
+
+- Energy functions
+- Energy landscapes
+- Optimization-based inference
+- Energy-based classification
+- Anomaly detection
+- Representation learning
+- Restricted Boltzmann Machines
+- Neural energy models
+- Energy-based planning
+
+---
+
+# 10. Planned Experiments
+
+## Experiment 1: Energy-Based Classification
+
+Goals:
+
+- Implement a simple energy classifier.
+- Compare with traditional classifiers.
+- Visualize energy values.
+
+
+## Experiment 2: Energy Landscape Optimization
+
+Compare optimization algorithms:
+
+- Gradient Descent
+- Momentum
+- Adam
+- Newton Method
+- BFGS
+
+Evaluate:
+
+- convergence speed
+- final energy
+- sensitivity to initialization
+
+
+## Experiment 3: Energy-Based Anomaly Detection
+
+Compare with:
+
+- Isolation Forest
+- One-Class SVM
+
+
+## Experiment 4: Energy-Based Planning
+
+Implement optimization of trajectories using:
+
+- goal cost
+- collision cost
+- smoothness cost
+
+---
+
+# 11. Technologies
+
+Programming:
+
+- Python
+- NumPy
+- Pandas
+
+Machine Learning:
+
+- Scikit-learn
+- PyTorch
+
+Visualization:
+
+- Matplotlib
+- Seaborn
+
+Optimization:
+
+- Gradient-based methods
+- Newton methods
+- Quasi-Newton methods
+
+---
+
+# 12. Research Direction
+
+This project connects several areas:
+
+```
+Applied Mathematics
+        ↓
+Optimization
+        ↓
+Machine Learning
+        ↓
+Energy-Based Learning
+        ↓
+Autonomous Systems
+        ↓
+Planning and Control
+```
+
+The long-term objective is to investigate how optimization principles can improve learning, inference, and decision-making algorithms for intelligent systems.
+
+---
+
+# Author
+
+**Fatemeh Khawari**
+
+Applied Mathematics | Optimization | Machine Learning | Autonomous Systems
